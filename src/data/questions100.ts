@@ -148,6 +148,7 @@ export const QUESTIONS_100: CivicsQuestion[] = [
     versions: ["2008", "65-20"],
     isSpecial65_20: true,
     answerChangesOverTime: true,
+    personalizeField: "senator",
   },
   {
     id: "q100-021",
@@ -170,6 +171,7 @@ export const QUESTIONS_100: CivicsQuestion[] = [
     category: "American Government",
     versions: ["2008"],
     answerChangesOverTime: true,
+    personalizeField: "representative",
   },
   {
     id: "q100-024",
@@ -208,6 +210,7 @@ export const QUESTIONS_100: CivicsQuestion[] = [
     versions: ["2008", "65-20"],
     isSpecial65_20: true,
     answerChangesOverTime: true,
+    personalizeField: "president",
   },
   {
     id: "q100-029",
@@ -216,6 +219,7 @@ export const QUESTIONS_100: CivicsQuestion[] = [
     category: "American Government",
     versions: ["2008"],
     answerChangesOverTime: true,
+    personalizeField: "vicePresident",
   },
   {
     id: "q100-030",
@@ -283,10 +287,9 @@ export const QUESTIONS_100: CivicsQuestion[] = [
   {
     id: "q100-039",
     question: "How many justices are on the Supreme Court?",
-    answers: ["Answers vary / current officeholder"],
+    answers: ["Nine (9)"],
     category: "American Government",
     versions: ["2008"],
-    answerChangesOverTime: true,
   },
   {
     id: "q100-040",
@@ -295,6 +298,7 @@ export const QUESTIONS_100: CivicsQuestion[] = [
     category: "American Government",
     versions: ["2008"],
     answerChangesOverTime: true,
+    personalizeField: "chiefJustice",
   },
   {
     id: "q100-041",
@@ -317,6 +321,7 @@ export const QUESTIONS_100: CivicsQuestion[] = [
     category: "American Government",
     versions: ["2008"],
     answerChangesOverTime: true,
+    personalizeField: "governor",
   },
   {
     id: "q100-044",
@@ -326,6 +331,7 @@ export const QUESTIONS_100: CivicsQuestion[] = [
     versions: ["2008", "65-20"],
     isSpecial65_20: true,
     answerChangesOverTime: true,
+    personalizeField: "capital",
   },
   {
     id: "q100-045",
@@ -342,6 +348,7 @@ export const QUESTIONS_100: CivicsQuestion[] = [
     category: "American Government",
     versions: ["2008"],
     answerChangesOverTime: true,
+    personalizeField: "presidentParty",
   },
   {
     id: "q100-047",
@@ -350,6 +357,7 @@ export const QUESTIONS_100: CivicsQuestion[] = [
     category: "American Government",
     versions: ["2008"],
     answerChangesOverTime: true,
+    personalizeField: "speakerOfHouse",
   },
   {
     id: "q100-048",

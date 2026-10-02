@@ -38,7 +38,26 @@ export interface CivicsQuestion {
    * validation can be more lenient.
    */
   answerChangesOverTime?: boolean;
+  /**
+   * When set, this question's real answer is personal to the test-taker
+   * (their state officials, or current federal officeholders) and should
+   * be resolved from the user's saved civics profile (see useCivicsProfile)
+   * instead of showing a generic "answers vary" placeholder.
+   */
+  personalizeField?: PersonalizeField;
 }
+
+/** Profile fields that can resolve a personalized question's real answer. */
+export type PersonalizeField =
+  | "capital"
+  | "governor"
+  | "senator"
+  | "representative"
+  | "president"
+  | "vicePresident"
+  | "speakerOfHouse"
+  | "chiefJustice"
+  | "presidentParty";
 
 /** The four study levels/modes a user can pick, independent of version. */
 export type StudyLevel = 0 | 1 | 2 | 3;

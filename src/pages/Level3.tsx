@@ -1,10 +1,12 @@
 import { Link, useParams } from "react-router-dom";
-import { EXAM_RULES, getQuestionsForVersion } from "../data";
+import { EXAM_RULES } from "../data";
 import type { ExamVersion } from "../types";
 import { useExamSession } from "../hooks/useExamSession";
 import { useProgress } from "../hooks/useProgress";
+import { usePersonalizedQuestions } from "../hooks/usePersonalizedQuestions";
 import { WriteAnswer } from "../components/WriteAnswer";
 import { ExamResult } from "../components/ExamResult";
+import { ProfilePrompt } from "../components/ProfilePrompt";
 import "../App.css";
 
 /**
@@ -14,7 +16,8 @@ import "../App.css";
 export function Level3() {
   const { version = "2025" } = useParams<{ version: string }>();
   const examVersion = version as ExamVersion;
-  const allQuestions = getQuestionsForVersion(examVersion);
+  const { questions: allQuestions, completeness } = usePersonalizedQuestions(examVersion);
+  const { done, total } = completeness();
   const rules = EXAM_RULES[examVersion];
   const { recordAnswer } = useProgress();
 
@@ -53,6 +56,7 @@ export function Level3() {
           ? "Practice exam complete"
           : `Question ${index + 1} of ${askCount} — need ${passThreshold} correct to pass`}
       </p>
+      <ProfilePrompt done={done} total={total} />
       <div className="session-stats">
         <div className="session-stats__item">
           <span className="session-stats__value">{correct}</span>

@@ -10,13 +10,16 @@ import { EnglishPractice } from "./pages/EnglishPractice";
 import { EnglishVocab } from "./pages/EnglishVocab";
 import { EnglishReading } from "./pages/EnglishReading";
 import { EnglishWriting } from "./pages/EnglishWriting";
+import { Profile } from "./pages/Profile";
 import { useTheme } from "./hooks/useTheme";
+import { useCivicsProfile } from "./hooks/useCivicsProfile";
 
 const THEME_ICON = { system: "🖥️", light: "☀️", dark: "🌙" } as const;
 const THEME_LABEL = { system: "System", light: "Light", dark: "Dark" } as const;
 
 function App() {
   const { theme, cycleTheme } = useTheme();
+  const { profile } = useCivicsProfile();
 
   return (
     <div className="app">
@@ -29,6 +32,9 @@ function App() {
             Civics
           </NavLink>
           <NavLink to="/english">English</NavLink>
+          <NavLink to="/profile" className="app__nav-state">
+            📍 {profile.state ?? "Set my state"}
+          </NavLink>
           <button
             type="button"
             className="app__theme-toggle"
@@ -52,6 +58,7 @@ function App() {
           <Route path="/english/vocab/:list" element={<EnglishVocab />} />
           <Route path="/english/reading" element={<EnglishReading />} />
           <Route path="/english/writing" element={<EnglishWriting />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </main>
     </div>

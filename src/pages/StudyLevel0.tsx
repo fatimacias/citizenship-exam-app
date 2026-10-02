@@ -1,20 +1,20 @@
 import { Link, useParams } from "react-router-dom";
 import { useMemo, useState } from "react";
 import type { ExamVersion } from "../types";
-import { getQuestionsForVersion } from "../data";
 import { shuffle } from "../hooks/useQuiz";
+import { usePersonalizedQuestions } from "../hooks/usePersonalizedQuestions";
 import { Flashcard } from "../components/Flashcard";
+import { ProfilePrompt } from "../components/ProfilePrompt";
 import "../App.css";
 
 /** Level 0: flashcard study mode. No scoring, just memorization. */
 export function StudyLevel0() {
   const { version = "2025" } = useParams<{ version: string }>();
   const examVersion = version as ExamVersion;
-  const questions = useMemo(
-    () => shuffle(getQuestionsForVersion(examVersion)),
-    [examVersion]
-  );
+  const { questions: baseQuestions, completeness } = usePersonalizedQuestions(examVersion);
+  const questions = useMemo(() => shuffle(baseQuestions), [baseQuestions]);
   const [index, setIndex] = useState(0);
+  const { done, total } = completeness();
 
   const current = questions[index];
   if (!current) {
@@ -30,6 +30,7 @@ export function StudyLevel0() {
       <p className="page__subtitle">
         Card {index + 1} of {questions.length}
       </p>
+      <ProfilePrompt done={done} total={total} />
       <Flashcard key={current.id} question={current} />
       <div className="quiz-nav">
         <button

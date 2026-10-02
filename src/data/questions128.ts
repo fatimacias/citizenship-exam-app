@@ -168,6 +168,7 @@ export const QUESTIONS_128: CivicsQuestion[] = [
     category: "American Government",
     versions: ["2025"],
     answerChangesOverTime: true,
+    personalizeField: "senator",
   },
   {
     id: "q128-024",
@@ -211,6 +212,7 @@ export const QUESTIONS_128: CivicsQuestion[] = [
     category: "American Government",
     versions: ["2025"],
     answerChangesOverTime: true,
+    personalizeField: "representative",
   },
   {
     id: "q128-030",
@@ -220,6 +222,7 @@ export const QUESTIONS_128: CivicsQuestion[] = [
     versions: ["2025", "65-20"],
     isSpecial65_20: true,
     answerChangesOverTime: true,
+    personalizeField: "speakerOfHouse",
   },
   {
     id: "q128-031",
@@ -279,6 +282,7 @@ export const QUESTIONS_128: CivicsQuestion[] = [
     versions: ["2025", "65-20"],
     isSpecial65_20: true,
     answerChangesOverTime: true,
+    personalizeField: "president",
   },
   {
     id: "q128-039",
@@ -288,6 +292,7 @@ export const QUESTIONS_128: CivicsQuestion[] = [
     versions: ["2025", "65-20"],
     isSpecial65_20: true,
     answerChangesOverTime: true,
+    personalizeField: "vicePresident",
   },
   {
     id: "q128-040",
@@ -417,6 +422,7 @@ export const QUESTIONS_128: CivicsQuestion[] = [
     category: "American Government",
     versions: ["2025"],
     answerChangesOverTime: true,
+    personalizeField: "chiefJustice",
   },
   {
     id: "q128-058",
@@ -447,6 +453,7 @@ export const QUESTIONS_128: CivicsQuestion[] = [
     versions: ["2025", "65-20"],
     isSpecial65_20: true,
     answerChangesOverTime: true,
+    personalizeField: "governor",
   },
   {
     id: "q128-062",
@@ -455,6 +462,7 @@ export const QUESTIONS_128: CivicsQuestion[] = [
     category: "American Government",
     versions: ["2025"],
     answerChangesOverTime: true,
+    personalizeField: "capital",
   },
   {
     id: "q128-063",

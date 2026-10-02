@@ -44,6 +44,11 @@
   color: white;
 }
 
+.app__nav-state {
+  border: 1.5px solid var(--color-border);
+  white-space: nowrap;
+}
+
 .app__theme-toggle {
   border: none;
   background: none;

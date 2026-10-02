@@ -1,10 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import { useMemo, useState } from "react";
-import { getQuestionsForVersion } from "../data";
 import type { ExamVersion } from "../types";
 import { shuffle } from "../hooks/useQuiz";
 import { useProgress } from "../hooks/useProgress";
+import { usePersonalizedQuestions } from "../hooks/usePersonalizedQuestions";
 import { Matching } from "../components/Matching";
+import { ProfilePrompt } from "../components/ProfilePrompt";
 import "../App.css";
 
 const BATCH_SIZE = 5;
@@ -14,16 +15,18 @@ export function Level2() {
   const { version = "2025" } = useParams<{ version: string }>();
   const examVersion = version as ExamVersion;
   const { recordAnswer } = useProgress();
+  const { questions: allQuestions, completeness } = usePersonalizedQuestions(examVersion);
+  const { done, total } = completeness();
 
   const batches = useMemo(() => {
-    const shuffled = shuffle(getQuestionsForVersion(examVersion));
+    const shuffled = shuffle(allQuestions);
     const chunks = [];
     for (let i = 0; i < shuffled.length; i += BATCH_SIZE) {
       chunks.push(shuffled.slice(i, i + BATCH_SIZE));
     }
     return chunks;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [examVersion]);
+  }, [allQuestions]);
 
   const [batchIndex, setBatchIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
@@ -57,6 +60,7 @@ export function Level2() {
       <p className="page__subtitle">
         Batch {batchIndex + 1} of {batches.length}
       </p>
+      <ProfilePrompt done={done} total={total} />
       <div className="session-stats">
         <div className="session-stats__item">
           <span className="session-stats__value">{correctCount}</span>
