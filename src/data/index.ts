@@ -7,6 +7,14 @@ export { QUESTIONS_100, QUESTIONS_128 };
 /** All questions from both official lists, deduplicated by id. */
 export const ALL_QUESTIONS: CivicsQuestion[] = [...QUESTIONS_100, ...QUESTIONS_128];
 
+/**
+ * The official 65-years-old / 20-years-permanent-resident 20-question
+ * subset, computed once as a stable array reference (rather than
+ * re-filtering on every call) so hooks that depend on question-list
+ * identity don't unnecessarily re-shuffle/re-run.
+ */
+export const QUESTIONS_65_20: CivicsQuestion[] = QUESTIONS_128.filter((q) => q.isSpecial65_20);
+
 export const EXAM_VERSION_LABELS: Record<ExamVersion, string> = {
   "2025": "2025 Version (128 Questions)",
   "2008": "2008 Version (100 Questions)",
@@ -48,7 +56,7 @@ export function getQuestionsForVersion(version: ExamVersion): CivicsQuestion[] {
   if (version === "2025") return QUESTIONS_128;
   if (version === "2008") return QUESTIONS_100;
   // 65-20: the official subset, taken from the current (2025) list.
-  return QUESTIONS_128.filter((q) => q.isSpecial65_20);
+  return QUESTIONS_65_20;
 }
 
 export function getQuestionById(id: string): CivicsQuestion | undefined {

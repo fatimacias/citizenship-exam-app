@@ -32,7 +32,7 @@ export function Level1() {
     answer,
     next,
     restart,
-  } = useExamSession({ questions: allQuestions, rules });
+  } = useExamSession({ questions: allQuestions, rules, version: examVersion, level: 1 });
 
   if (!currentQuestion) {
     return <p>No questions available.</p>;

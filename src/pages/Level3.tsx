@@ -31,7 +31,7 @@ export function Level3() {
     answer,
     next,
     restart,
-  } = useExamSession({ questions: allQuestions, rules });
+  } = useExamSession({ questions: allQuestions, rules, version: examVersion, level: 3 });
 
   if (!currentQuestion) {
     return <p>No questions available.</p>;
