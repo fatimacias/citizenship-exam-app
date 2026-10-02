@@ -7,6 +7,9 @@ import { Level1 } from "./pages/Level1";
 import { Level2 } from "./pages/Level2";
 import { Level3 } from "./pages/Level3";
 import { EnglishPractice } from "./pages/EnglishPractice";
+import { EnglishVocab } from "./pages/EnglishVocab";
+import { EnglishReading } from "./pages/EnglishReading";
+import { EnglishWriting } from "./pages/EnglishWriting";
 
 function App() {
   return (
@@ -31,6 +34,9 @@ function App() {
           <Route path="/study/:version/level2" element={<Level2 />} />
           <Route path="/study/:version/level3" element={<Level3 />} />
           <Route path="/english" element={<EnglishPractice />} />
+          <Route path="/english/vocab/:list" element={<EnglishVocab />} />
+          <Route path="/english/reading" element={<EnglishReading />} />
+          <Route path="/english/writing" element={<EnglishWriting />} />
         </Routes>
       </main>
     </div>

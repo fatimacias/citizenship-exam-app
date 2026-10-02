@@ -1,30 +1,21 @@
 import { Link } from "react-router-dom";
+import { useEnglishProgress } from "../hooks/useEnglishProgress";
+import { READING_SENTENCES, READING_VOCAB, WRITING_SENTENCES, WRITING_VOCAB } from "../data/english";
 import "../App.css";
 
-interface VocabCard {
-  word: string;
-  translation: string;
-  example: string;
-}
-
-// Minimal starter sample in the style of the USCIS reading/writing vocab
-// lists. Full English module content/scope is intentionally deferred to a
-// later iteration - see README roadmap.
-const SAMPLE_VOCAB: VocabCard[] = [
-  {
-    word: "citizen",
-    translation: "ciudadano/a",
-    example: "She became a United States citizen last year.",
-  },
-  {
-    word: "government",
-    translation: "gobierno",
-    example: "The government is divided into three branches.",
-  },
-];
-
-/** Placeholder landing page for the (separate, future) English practice module. */
+/**
+ * English module hub. Mirrors the real USCIS English test structure: a
+ * reading test (read 1 of 3 sentences aloud) and a writing test (write 1 of
+ * 3 dictated sentences), plus vocabulary flashcards to prep for both.
+ */
 export function EnglishPractice() {
+  const { getMasteredCount } = useEnglishProgress();
+
+  const readingVocabCount = getMasteredCount("vocab-reading");
+  const writingVocabCount = getMasteredCount("vocab-writing");
+  const readingSentenceCount = getMasteredCount("reading");
+  const writingSentenceCount = getMasteredCount("writing");
+
   return (
     <div className="page">
       <p className="breadcrumb">
@@ -32,17 +23,34 @@ export function EnglishPractice() {
       </p>
       <h1 className="page__title">English Practice</h1>
       <p className="page__subtitle">
-        More reading, writing, and speaking practice content is coming soon. For now, here are a
-        couple of sample vocabulary cards to get a feel for the format.
+        The naturalization interview also tests English reading, writing, and speaking. Practice
+        with the official USCIS vocabulary and sample sentences below.
       </p>
       <div className="card-grid">
-        {SAMPLE_VOCAB.map((card) => (
-          <div key={card.word} className="vocab-card">
-            <h3>{card.word}</h3>
-            <p className="translation">{card.translation}</p>
-            <p>{card.example}</p>
-          </div>
-        ))}
+        <Link to="/english/vocab/reading" className="option-card">
+          <h3>📖 Vocabulary — Reading list</h3>
+          <p>{READING_VOCAB.length} official words used in reading-test sentences.</p>
+          <span className="option-card__meta">{readingVocabCount} marked as known</span>
+        </Link>
+        <Link to="/english/vocab/writing" className="option-card">
+          <h3>✍️ Vocabulary — Writing list</h3>
+          <p>{WRITING_VOCAB.length} official words used in writing-test sentences.</p>
+          <span className="option-card__meta">{writingVocabCount} marked as known</span>
+        </Link>
+        <Link to="/english/reading" className="option-card">
+          <h3>🗣️ Reading practice</h3>
+          <p>Read sentences aloud, just like the officer will ask you to during the interview.</p>
+          <span className="option-card__meta">
+            {readingSentenceCount}/{READING_SENTENCES.length} mastered
+          </span>
+        </Link>
+        <Link to="/english/writing" className="option-card">
+          <h3>⌨️ Writing dictation</h3>
+          <p>Listen to a sentence and type what you hear, like the officer dictating to you.</p>
+          <span className="option-card__meta">
+            {writingSentenceCount}/{WRITING_SENTENCES.length} mastered
+          </span>
+        </Link>
       </div>
     </div>
   );

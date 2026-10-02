@@ -86,3 +86,40 @@ export function fuzzyMatch(userInput: string, acceptedAnswer: string): boolean {
 export function isAnyAnswerMatch(userInput: string, acceptedAnswers: string[]): boolean {
   return acceptedAnswers.some((answer) => fuzzyMatch(userInput, answer));
 }
+
+export interface WordDiff {
+  word: string;
+  ok: boolean;
+}
+
+export interface DictationResult {
+  /** True once the typed text is close enough to count as correct. */
+  correct: boolean;
+  /** 0-1 fraction of target words matched, for a lenient "close enough" pass. */
+  score: number;
+  /** Per-word feedback (target sentence words), for highlighting mistakes. */
+  diff: WordDiff[];
+}
+
+/**
+ * Compares a typed sentence (English writing-test dictation) against the
+ * target sentence. Case/accents/punctuation are ignored; each target word
+ * is matched against the typed word at the same position, with a small
+ * typo tolerance. Passes at >=85% of words correct (the real test allows
+ * minor spelling slips as long as the sentence is understandable).
+ */
+export function scoreDictation(typed: string, target: string): DictationResult {
+  const typedWords = normalize(typed).split(" ").filter(Boolean);
+  const targetWords = normalize(target).split(" ").filter(Boolean);
+
+  const diff: WordDiff[] = targetWords.map((word, i) => {
+    const candidate = typedWords[i];
+    if (!candidate) return { word, ok: false };
+    const ok = candidate === word || levenshtein(candidate, word) <= toleranceFor(word.length);
+    return { word, ok };
+  });
+
+  const okCount = diff.filter((d) => d.ok).length;
+  const score = targetWords.length > 0 ? okCount / targetWords.length : 0;
+  return { correct: score >= 0.85, score, diff };
+}
