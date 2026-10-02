@@ -18,8 +18,10 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* Falls back to the OS/browser preference unless the user picked an explicit
+   theme below (data-theme set by the theme toggle, persisted in localStorage). */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --color-bg: #14151c;
     --color-surface: #1f202a;
     --color-text: #f1f1f5;
@@ -28,6 +30,32 @@
     --color-success-bg: #10301f;
     --color-error-bg: #3a1414;
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #14151c;
+  --color-surface: #1f202a;
+  --color-text: #f1f1f5;
+  --color-text-muted: #a3a3b2;
+  --color-border: #33333f;
+  --color-success-bg: #10301f;
+  --color-error-bg: #3a1414;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-bg: #f7f7fb;
+  --color-surface: #ffffff;
+  --color-text: #1b1b24;
+  --color-text-muted: #5f5f6e;
+  --color-border: #e1e1e9;
+  --color-primary: #2a5bd7;
+  --color-primary-dark: #1d44a8;
+  --color-success: #1d9a5a;
+  --color-success-bg: #e4f8ee;
+  --color-error: #d23c3c;
+  --color-error-bg: #fbe8e8;
 }
 
 * {

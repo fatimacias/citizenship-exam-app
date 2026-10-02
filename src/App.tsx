@@ -10,8 +10,14 @@ import { EnglishPractice } from "./pages/EnglishPractice";
 import { EnglishVocab } from "./pages/EnglishVocab";
 import { EnglishReading } from "./pages/EnglishReading";
 import { EnglishWriting } from "./pages/EnglishWriting";
+import { useTheme } from "./hooks/useTheme";
+
+const THEME_ICON = { system: "🖥️", light: "☀️", dark: "🌙" } as const;
+const THEME_LABEL = { system: "System", light: "Light", dark: "Dark" } as const;
 
 function App() {
+  const { theme, cycleTheme } = useTheme();
+
   return (
     <div className="app">
       <header className="app__header">
@@ -23,6 +29,15 @@ function App() {
             Civics
           </NavLink>
           <NavLink to="/english">English</NavLink>
+          <button
+            type="button"
+            className="app__theme-toggle"
+            onClick={cycleTheme}
+            title={`Theme: ${THEME_LABEL[theme]} (click to change)`}
+            aria-label={`Change theme, currently ${THEME_LABEL[theme]}`}
+          >
+            {THEME_ICON[theme]}
+          </button>
         </nav>
       </header>
       <main>
