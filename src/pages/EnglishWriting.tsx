@@ -61,9 +61,12 @@ export function EnglishWriting() {
       </p>
       <h1 className="page__title">Writing dictation</h1>
       <p className="page__subtitle">
-        Listen to the sentence, then type exactly what you hear. Sentence {index + 1} of{" "}
-        {sentences.length} — {getMasteredCount("writing")}/{WRITING_SENTENCES.length} mastered
-        overall.
+        Listen to the sentence, then type what you hear. Sentence {index + 1} of {sentences.length}{" "}
+        — {getMasteredCount("writing")}/{WRITING_SENTENCES.length} mastered overall.
+      </p>
+      <p className="page__subtitle" style={{ fontSize: "0.8rem", marginTop: "-0.5rem" }}>
+        💡 On the real test, small spelling slips on minor words are OK — the officer just needs
+        to understand the sentence and see the key words written correctly.
       </p>
 
       <div className="quiz-nav" style={{ marginBottom: "1rem" }}>
