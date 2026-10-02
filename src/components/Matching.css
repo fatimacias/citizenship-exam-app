@@ -6,16 +6,12 @@
   margin: 0 auto;
 }
 
-@media (max-width: 640px) {
-  .matching {
-    grid-template-columns: 1fr;
-  }
-}
-
 .matching__column {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  /* Columns keep their own width even if content wraps to many lines. */
+  min-width: 0;
 }
 
 .matching__column h3 {
@@ -34,8 +30,40 @@
   background: var(--color-surface);
   color: var(--color-text);
   font-size: 0.95rem;
+  line-height: 1.3;
   cursor: pointer;
+  /* Long sentences must wrap inside the narrow mobile column instead of overflowing it. */
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
   transition: border-color 0.15s, background 0.15s, opacity 0.2s;
+}
+
+/* Keep the 2-column layout on phones too (so a question and its answer choices
+   stay side by side, within reach, instead of the single stacked list forcing
+   the user to scroll far down to find matches) but shrink spacing/typography
+   so both narrow columns stay comfortably readable. */
+@media (max-width: 480px) {
+  .matching {
+    gap: 0.5rem;
+  }
+
+  .matching__column {
+    gap: 0.4rem;
+  }
+
+  .matching__column h3 {
+    font-size: 0.7rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .matching__item {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.78rem;
+    border-radius: 8px;
+    /* Keep tap targets usable even when text is short and wraps to one line. */
+    min-height: 2.75rem;
+  }
 }
 
 .matching__item:disabled {
