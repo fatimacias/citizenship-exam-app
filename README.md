@@ -57,6 +57,25 @@ npm run preview  # optional: serve the production build locally to sanity-check 
 `npm run build` produces a standard static Vite build (`dist/`) with no server-side code,
 so it deploys cleanly to any static host.
 
+## Installing as a mobile app (PWA)
+
+This app is an installable Progressive Web App — no app store, no Android Studio, no
+signing required. It works fully offline after the first visit.
+
+**Android (Chrome):**
+1. Open the deployed URL in Chrome.
+2. Tap the ⋮ menu → **"Install app"** (or **"Add to Home screen"**).
+3. It launches full-screen from your home screen like a native app, and keeps working
+   without an internet connection.
+
+**iPhone/iPad (Safari):**
+1. Open the deployed URL in Safari.
+2. Tap the Share icon → **"Add to Home Screen"**.
+
+The service worker (`vite-plugin-pwa`) pre-caches the whole app shell and question data
+on first load, so subsequent opens — including offline — work instantly. Updates roll
+out automatically the next time you're online.
+
 ## Deploying to Vercel
 
 This repo is ready to deploy on Vercel's free tier with zero extra configuration:
@@ -126,7 +145,8 @@ A few notes on the data:
 - **Payments / premium tier**, if/when there's a reason to gate extra content or
   features behind a subscription.
 - **Android packaging via [Capacitor](https://capacitorjs.com/)**, wrapping this same
-  web app as a native Android app. The UI was built mobile-first with this in mind.
+  web app as a native Android app with a real installable `.apk`, if the PWA install
+  flow above isn't enough (e.g. deeper native APIs, Play Store distribution).
 - **Expanded English practice module** — the full USCIS reading/writing vocabulary
   list, plus reading and writing practice exercises (currently just a placeholder
   landing page with two sample cards).
