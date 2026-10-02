@@ -21,6 +21,24 @@ export const EXAM_VERSION_DESCRIPTIONS: Record<ExamVersion, string> = {
 };
 
 /**
+ * Real-exam simulation rules per USCIS version: how many random questions
+ * the officer asks, how many correct answers are needed to pass, and the
+ * number of incorrect answers at which the test stops early as a fail
+ * (mirrors the real exam, which stops as soon as pass/fail is certain).
+ */
+export interface ExamRules {
+  askCount: number;
+  passThreshold: number;
+  failThreshold: number;
+}
+
+export const EXAM_RULES: Record<ExamVersion, ExamRules> = {
+  "2025": { askCount: 20, passThreshold: 12, failThreshold: 9 },
+  "2008": { askCount: 10, passThreshold: 6, failThreshold: 5 },
+  "65-20": { askCount: 10, passThreshold: 6, failThreshold: 5 },
+};
+
+/**
  * Returns the question list for a given exam version.
  * "65-20" returns the official 20-question subset, sourced from the 2025
  * list (the current official list) by referencing isSpecial65_20 flags
